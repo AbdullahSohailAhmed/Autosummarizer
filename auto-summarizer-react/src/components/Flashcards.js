@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import './Flashcards.css';
 import * as THREE from 'three';
-import RINGS from 'vanta/dist/vanta.rings.min';
+import HALO from 'vanta/dist/vanta.halo.min';
 
 const Flashcards = () => {
   const vantaRef = useRef(null);
 
   useEffect(() => {
-    const vantaEffect = RINGS({
+    const vantaEffect = HALO({
       el: vantaRef.current,
       mouseControls: true,
       touchControls: true,
