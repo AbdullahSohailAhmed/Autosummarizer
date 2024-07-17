@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.contact-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.contact-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    color: #fff; /* Adjust color as needed */
+}
+
+.contact-content h1 {
+    margin-bottom: 1rem;
+}
+
+.contact-content p {
+    margin-bottom: 2rem;
+}
