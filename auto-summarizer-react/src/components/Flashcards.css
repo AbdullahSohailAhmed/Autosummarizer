@@ -24,21 +24,22 @@ html, body {
   position: relative;
   z-index: 2;
   padding: 2rem 1rem;
-  color: var(--color-text); /* Light grey text */
+  padding-top: 60px; 
+  color: var(--color-text);
 }
 
 .flashcards-content h1 {
-  color: var(--color-text); /* Light grey text */
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
 .flashcards-content p {
-  color: var(--color-text); /* Light grey text */
+  color: var(--color-text);
   margin-bottom: 2rem;
 }
 
 .flashcards-content button {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); /* Gradient background */
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
   color: var(--color-text);
   border: none;
   padding: 0.5rem 1rem;
@@ -48,5 +49,5 @@ html, body {
 }
 
 .flashcards-content button:hover {
-  background-color: var(--color-button-hover); /* Darker red on hover */
+  background-color: var(--color-button-hover);
 }

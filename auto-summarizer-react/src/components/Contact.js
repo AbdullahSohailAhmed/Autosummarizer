@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import './Contact.css';
 import * as THREE from 'three';
 import RINGS from 'vanta/dist/vanta.rings.min';
+import './Contact.css';
 
 const Contact = () => {
   const vantaRef = useRef(null);
@@ -24,8 +24,8 @@ const Contact = () => {
   }, []);
 
   return (
-    <div ref={vantaRef} style={{ height: '100vh', width: '100vw', position: 'relative' }}>
-      <div style={{ position: 'relative', zIndex: 1, padding: '2rem' }}>
+    <div ref={vantaRef} className="contact-container">
+      <div className="contact-content">
         <h1>Contact Us</h1>
         <p>This is the contact page.</p>
       </div>
