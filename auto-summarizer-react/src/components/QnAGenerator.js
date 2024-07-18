@@ -69,7 +69,7 @@ const QnAGenerator = () => {
         <h1>QnA Generator</h1>
         <p>Upload a PDF file to generate questions and answers.</p>
         <input type="file" onChange={handleFileChange} />
-        <button onClick={handleFileUpload}>Ask</button>
+        <button onClick={handleFileUpload}>Generate QnA</button>
         {error && <p className="error">{error}</p>}
         {qnaPairs.length > 0 && (
           <div className="qna-list">
