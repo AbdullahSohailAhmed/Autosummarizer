@@ -1,17 +1,20 @@
 import os
-
-# Suppress the huggingface_hub symlinks warning
-os.environ['HF_HUB_DISABLE_SYMLINKS_WARNING'] = '1'
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import fitz  # PyMuPDF
 from transformers import pipeline
 import textwrap
 import random
+import datetime
 
 app = Flask(__name__)
 CORS(app)
+
+# Suppress the huggingface_hub symlinks warning
+os.environ['HF_HUB_DISABLE_SYMLINKS_WARNING'] = '1'
+
+# Print start message when the application starts
+print(f"{datetime.datetime.now()} - Question generation started.")
 
 def extract_text_from_pdf(pdf):
     doc = fitz.open(stream=pdf.read(), filetype="pdf")
@@ -53,12 +56,22 @@ def upload_file():
             return jsonify({"error": "No selected file"})
         if file:
             text = extract_text_from_pdf(file)
+            
+            # Generate questions
             all_questions = generate_questions(text)
+            
+            # Select first question and 5 random questions from the rest
             if len(all_questions) > 1:
                 selected_questions = [all_questions[0]] + random.sample(all_questions[1:], min(5, len(all_questions) - 1))
             else:
                 selected_questions = all_questions
+            
+            # Answer selected questions
             answers = answer_questions(selected_questions, text)
+
+            # Print end message when questions are generated and answered
+            print(f"{datetime.datetime.now()} - Question generation ended.")
+
             return jsonify({"questions": selected_questions, "answers": answers})
     except Exception as e:
         return jsonify({"error": str(e)})
