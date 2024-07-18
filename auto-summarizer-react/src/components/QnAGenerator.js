@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './QnAGenerator.css';
 import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
 
 const QnA = () => {
   const vantaRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [qnaPairs, setQnaPairs] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const vantaEffect = NET({
@@ -23,13 +26,59 @@ const QnA = () => {
     };
   }, []);
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleFileUpload = async () => {
+    if (!file) {
+      setError("No file selected");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const combinedQnA = data.questions.map((question, index) => ({
+          question,
+          answer: data.answers[index].answer
+        }));
+        setQnaPairs(combinedQnA);
+        setError("");
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      setError("Error uploading file");
+      console.error("Error uploading file:", error); // Log error to console
+    }
+  };
+
   return (
     <div className="qna-container">
       <div ref={vantaRef} className="vanta-background"></div>
       <div className="qna-content">
         <h1>QnA</h1>
         <p>Ask your questions here...</p>
-        <button>Ask</button>
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={handleFileUpload}>Ask</button>
+        {error && <p className="error">{error}</p>}
+        {qnaPairs.length > 0 && (
+          <div>
+            {qnaPairs.map((qna, index) => (
+              <div key={index} className="qna-pair">
+                <p className="question"><strong>Q:</strong> {qna.question}</p>
+                <p className="answer"><strong>A:</strong> {qna.answer}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

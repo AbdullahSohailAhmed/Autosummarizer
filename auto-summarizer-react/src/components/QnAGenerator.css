@@ -26,16 +26,19 @@ html, body {
   padding: 2rem 1rem;
   padding-top: 60px; 
   color: var(--color-text);
+  font-size: 0.9em; /* Reduced font size */
 }
 
 .qna-content h1 {
   color: var(--color-text);
   margin-bottom: 1rem;
+  font-size: 2em; /* Reduced font size */
 }
 
 .qna-content p {
   color: var(--color-text);
   margin-bottom: 2rem;
+  font-size: 1.5em; /* Reduced font size */
 }
 
 .qna-content button {
@@ -46,8 +49,23 @@ html, body {
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 1em; /* Reduced font size */
 }
 
 .qna-content button:hover {
   background-color: var(--color-button-hover);
+}
+
+.qna-pair {
+  margin-bottom: 20px;
+}
+
+.qna-pair .question, .qna-pair .answer {
+  font-size: 1.2em; /* Adjust font size to fit all content */
+  margin: 5px 0;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
 }
