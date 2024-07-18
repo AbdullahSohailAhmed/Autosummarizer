@@ -3,7 +3,7 @@ import './QnAGenerator.css';
 import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
 
-const QnA = () => {
+const QnAGenerator = () => {
   const vantaRef = useRef(null);
   const [file, setFile] = useState(null);
   const [qnaPairs, setQnaPairs] = useState([]);
@@ -18,7 +18,9 @@ const QnA = () => {
       minHeight: 200.00,
       minWidth: 200.00,
       scale: 1.00,
-      scaleMobile: 1.00
+      scaleMobile: 1.00,
+      color: 0xff0000, // Red color for the Vanta.NET background
+      backgroundColor: 0x000000, // Black background color
     });
 
     return () => {
@@ -64,13 +66,13 @@ const QnA = () => {
     <div className="qna-container">
       <div ref={vantaRef} className="vanta-background"></div>
       <div className="qna-content">
-        <h1>QnA</h1>
-        <p>Ask your questions here...</p>
+        <h1>QnA Generator</h1>
+        <p>Upload a PDF file to generate questions and answers.</p>
         <input type="file" onChange={handleFileChange} />
         <button onClick={handleFileUpload}>Ask</button>
         {error && <p className="error">{error}</p>}
         {qnaPairs.length > 0 && (
-          <div>
+          <div className="qna-list">
             {qnaPairs.map((qna, index) => (
               <div key={index} className="qna-pair">
                 <p className="question"><strong>Q:</strong> {qna.question}</p>
@@ -84,4 +86,4 @@ const QnA = () => {
   );
 };
 
-export default QnA;
+export default QnAGenerator;
