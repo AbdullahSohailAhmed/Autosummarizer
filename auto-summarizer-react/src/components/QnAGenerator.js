@@ -18,9 +18,7 @@ const QnAGenerator = () => {
       minHeight: 200.00,
       minWidth: 200.00,
       scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0xff0000, // Red color for the Vanta.NET background
-      backgroundColor: 0x000000, // Black background color
+      scaleMobile: 1.00
     });
 
     return () => {
