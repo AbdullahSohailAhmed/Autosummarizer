@@ -60,12 +60,12 @@ const Flashcards = () => {
         </form>
         {summary.length > 0 && (
           <div className="summary">
-            <h2>Summary</h2>
-            <ul>
-              {summary.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
+            <h2>Flashcards</h2>
+            {summary.map((point, index) => (
+              <div key={index} className="card">
+                <p>{point}</p>
+              </div>
+            ))}
           </div>
         )}
       </div>

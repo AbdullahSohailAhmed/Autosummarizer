@@ -84,29 +84,19 @@ html, body {
   font-size: 1.1em;
 }
 
-flashcards-content button:hover {
+.flashcards-content button:hover {
   background-color: #c13a68;
 }
 
-.summary {
-  margin-top: 2rem;
+.card {
+  margin-top: 1rem;
   background: var(--color-secondary);
   padding: 1rem;
   border-radius: var(--border-radius);
   border: 1px solid #6e2855;
+  text-align: left;
 }
 
-.summary h2 {
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.summary ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-}
-
-.summary li {
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
+.card p {
+  margin: 0;
 }
