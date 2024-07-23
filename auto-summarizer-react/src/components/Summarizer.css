@@ -4,6 +4,14 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
+:root {
+  --color-text: #333;
+  --color-primary: #4CAF50;
+  --color-accent: #81C784;
+  --color-button-hover: #66BB6A;
+  --border-radius: 8px;
+}
+
 .summarizer-container {
   position: relative;
   height: 100vh;
@@ -24,8 +32,15 @@ html, body {
   position: relative;
   z-index: 2;
   padding: 2rem 1rem;
-  padding-top: 60px; 
-  color: var(--color-text); 
+  padding-top: 60px;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--border-radius);
+  max-width: 800px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 .summarizer-content h1 {
@@ -34,20 +49,99 @@ html, body {
 }
 
 .summarizer-content p {
-  color: var(--color-text); 
+  color: var(--color-text);
   margin-bottom: 2rem;
 }
 
-.summarizer-content button {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); 
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
   color: var(--color-text);
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.controls input {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+}
+
+.controls button {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #fff;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color 0.3s;
+  align-self: flex-end;
+  margin-bottom: 1rem;
 }
 
-.summarizer-content button:hover {
-  background-color: var(--color-button-hover); 
+.controls button:hover {
+  background-color: var(--color-button-hover);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.text-section, .summary-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-section textarea {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.input-buttons, .output-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-button {
+  color: var(--color-text);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.icon-button:hover {
+  color: var(--color-button-hover);
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+}
+
+.summary p {
+  margin: 0 0 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .content {
+    flex-direction: column;
+  }
 }
