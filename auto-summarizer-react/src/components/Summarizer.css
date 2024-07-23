@@ -33,7 +33,7 @@ html, body {
   z-index: 2;
   padding: 7rem 5rem;
   color: var(--color-text);
-  background: rgba(17, 17, 17, 0.596);
+  background:rgba(17, 17, 17, 0.452);
   border-radius: var(--border-radius);
   max-width: 1200px;
   margin: auto;
@@ -92,12 +92,15 @@ html, body {
 }
 
 .text-section textarea {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-}
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #ccc;
+    background: rgba(17, 17, 17, 0); /* White with 20% opacity for transparency */
+    color: var(--color-text); /* Ensure text color is readable */
+    margin-bottom: 1rem;
+  }
+  
 
 .input-buttons, .output-buttons {
   display: flex;
