@@ -94,10 +94,6 @@ const SummarizationComponent = () => {
     <div className="summarizer-container">
       <div ref={vantaRef} className="vanta-background"></div>
       <div className="summarizer-content">
-        <header>
-          <h1>Quick Recap</h1>
-          <p>Free tool for content creation and summarization</p>
-        </header>
         <div className="controls">
           <label>
             Min Length:
@@ -119,7 +115,7 @@ const SummarizationComponent = () => {
         </div>
         <div className="content">
           <div className="text-section">
-            <h3>Your text (no character limit)</h3>
+            <h3>Your text</h3>
             <textarea
               rows="20"
               cols="50"

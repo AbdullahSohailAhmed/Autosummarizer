@@ -31,26 +31,15 @@ html, body {
 .summarizer-content {
   position: relative;
   z-index: 2;
-  padding: 2rem 1rem;
-  padding-top: 60px;
+  padding: 7rem 5rem;
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(17, 17, 17, 0.596);
   border-radius: var(--border-radius);
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   height: calc(100vh - 60px);
   overflow-y: auto;
-}
-
-.summarizer-content h1 {
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.summarizer-content p {
-  color: var(--color-text);
-  margin-bottom: 2rem;
 }
 
 .controls {
@@ -93,7 +82,6 @@ html, body {
 
 .content {
   display: flex;
-  flex-direction: column;
   gap: 2rem;
 }
 
@@ -128,6 +116,12 @@ html, body {
 
 .error {
   color: red;
+  margin-bottom: 1rem;
+}
+
+.summary {
+  flex: 1;
+  overflow-y: auto;
   margin-bottom: 1rem;
 }
 
