@@ -134,14 +134,3 @@ html, body {
 .summary p {
   margin: 0 0 1rem;
 }
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .controls {
-    flex-direction: column;
-  }
-
-  .content {
-    flex-direction: column;
-  }
-}

@@ -53,7 +53,6 @@ const SummarizationComponent = () => {
       }
 
       const data = await response.json();
-      console.log(data);
       setSummary(data.summary);
     } catch (error) {
       console.error('Failed to fetch:', error.message || error);

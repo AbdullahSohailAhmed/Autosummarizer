@@ -4,7 +4,7 @@ from transformers import pipeline  # Example for summarizer
 import pdfplumber  # Enhanced PDF extraction
 
 # Create the Flask app
-app = Flask(_name_)
+app = Flask(__name__)
 CORS(app)  # Enable CORS
 
 # Initialize the summarizer with a specific BART model
@@ -77,5 +77,5 @@ def summarize():
         print(f"Error during summarization: {e}")
         return jsonify({'error': str(e)}), 500
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
