@@ -12,6 +12,7 @@ const SummarizationComponent = () => {
   const [maxLength, setMaxLength] = useState(150);
   const [pdfFiles, setPdfFiles] = useState([]);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const vantaRef = useRef(null);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const SummarizationComponent = () => {
 
   const handleSummarize = async () => {
     setError('');
+    setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append('texts', text);
@@ -57,6 +59,8 @@ const SummarizationComponent = () => {
     } catch (error) {
       console.error('Failed to fetch:', error.message || error);
       setError(`Error: ${error.message || error}`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,6 +83,7 @@ const SummarizationComponent = () => {
 
   const handleClearText = () => {
     setText('');
+    setPdfFiles([]);
   };
 
   const handleClearSummary = () => {
@@ -88,6 +93,10 @@ const SummarizationComponent = () => {
   const handlePdfUpload = (event) => {
     const files = Array.from(event.target.files);
     setPdfFiles(files);
+    setText((prevText) => {
+      const fileNames = files.map(file => file.name).join(', ');
+      return `${prevText}\n${fileNames}`;
+    });
   };
 
   return (
@@ -111,7 +120,9 @@ const SummarizationComponent = () => {
               onChange={(e) => setMaxLength(Number(e.target.value))}
             />
           </label>
-          <button onClick={handleSummarize}>SUMMARIZE</button>
+          <button onClick={handleSummarize} disabled={isLoading}>
+            {isLoading ? 'Summarizing...' : 'SUMMARIZE'}
+          </button>
         </div>
         <div className="content">
           <div className="text-section">
@@ -141,11 +152,7 @@ const SummarizationComponent = () => {
           <div className="summary-section">
             <h3>Summary</h3>
             {error && <div className="error">{error}</div>}
-            <div className="summary">
-              {summary.split('\n\n').map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
+            <div className="summary">{summary}</div>
             <div className="output-buttons">
               <FontAwesomeIcon icon={faCopy} onClick={handleCopy} className="icon-button" />
               <FontAwesomeIcon icon={faTrash} onClick={handleClearSummary} className="icon-button" />
