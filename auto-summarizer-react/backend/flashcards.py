@@ -38,7 +38,7 @@ def summarize(text, max_points=5):
     return points
 
 # Route to handle PDF upload and summarization
-@app.route('/upload', methods=['POST'])
+@app.route('/uploads', methods=['POST'])
 def upload():
     file = request.files['file']
     if file:

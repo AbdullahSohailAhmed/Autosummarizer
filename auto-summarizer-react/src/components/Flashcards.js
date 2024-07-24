@@ -37,7 +37,7 @@ const Flashcards = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:5001/upload', formData, {
+      const response = await axios.post('http://localhost:5001/uploads', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

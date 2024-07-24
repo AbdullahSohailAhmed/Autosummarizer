@@ -44,7 +44,7 @@ const SummarizationComponent = () => {
         formData.append('pdf_files', file);
       });
 
-      const response = await fetch('http://127.0.0.1:5000/summarize', {
+      const response = await fetch('http://127.0.0.1:5002/summarize', {
         method: 'POST',
         body: formData,
       });

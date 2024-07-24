@@ -68,8 +68,7 @@ def summarize():
             summaries.append(summary)
 
         # Combine all summaries into final_summary
-        final_summary = "\n\n".join(summaries)  # Joining summaries with double newline for paragraph breaks
-        print("Final summary:", final_summary)  # Debugging line
+        final_summary = "\n\n".join(summaries)  # Joining summaries with double newline for paragraph breaks # Debugging line
 
         return jsonify({'summary': final_summary})
 
@@ -78,4 +77,4 @@ def summarize():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5002,debug=True)
