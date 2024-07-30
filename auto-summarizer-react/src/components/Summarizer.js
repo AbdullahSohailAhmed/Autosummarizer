@@ -8,8 +8,7 @@ import BIRDS from 'vanta/dist/vanta.birds.min';
 const SummarizationComponent = () => {
   const [text, setText] = useState('');
   const [summary, setSummary] = useState('');
-  const [minLength, setMinLength] = useState(10);
-  const [maxLength, setMaxLength] = useState(150);
+  const [summaryLevel, setSummaryLevel] = useState('summary');
   const [pdfFiles, setPdfFiles] = useState([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -38,13 +37,12 @@ const SummarizationComponent = () => {
     try {
       const formData = new FormData();
       formData.append('texts', text);
-      formData.append('min_length', minLength);
-      formData.append('max_length', maxLength);
+      formData.append('summary_level', summaryLevel);
       pdfFiles.forEach((file) => {
         formData.append('pdf_files', file);
       });
 
-      const response = await fetch('http://127.0.0.1:5002/summarize', {
+      const response = await fetch('http://127.0.0.1:5000/summarize', {
         method: 'POST',
         body: formData,
       });
@@ -105,20 +103,15 @@ const SummarizationComponent = () => {
       <div className="summarizer-content">
         <div className="controls">
           <label>
-            Min Length:
-            <input
-              type="number"
-              value={minLength}
-              onChange={(e) => setMinLength(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Max Length:
-            <input
-              type="number"
-              value={maxLength}
-              onChange={(e) => setMaxLength(Number(e.target.value))}
-            />
+            Summary Level:
+            <select
+              value={summaryLevel}
+              onChange={(e) => setSummaryLevel(e.target.value)}
+            >
+              <option value="abstract">Abstract (5%)</option>
+              <option value="summary">Summary (15%)</option>
+              <option value="detailed">Detailed summary (30%)</option>
+            </select>
           </label>
           <button onClick={handleSummarize} disabled={isLoading}>
             {isLoading ? 'Summarizing...' : 'SUMMARIZE'}

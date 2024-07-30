@@ -39,9 +39,16 @@ def chunk_text(text, chunk_size=1000):
 def summarize():
     try:
         text_list = request.form.getlist('texts')
-        min_length = int(request.form.get('min_length', 100))
-        max_length = int(request.form.get('max_length', 800))  # Initial max_length setting
-
+        level = request.form.get('summary_level', 'summary')
+        
+        level_to_percentage = {
+            'abstract': 0.10,  # 10% of the input length
+            'summary': 0.20,  # 20% of the input length
+            'detailed': 0.30,  # 30% of the input length
+        }
+        
+        percentage = level_to_percentage.get(level, 0.20)
+        
         pdf_files = request.files.getlist('pdf_files')
         pdf_text = extract_text_from_pdfs(pdf_files)
 
@@ -54,27 +61,31 @@ def summarize():
         if not combined_text.strip():
             raise ValueError("The combined text is empty. Please provide some text or PDF content.")
 
-        # Adjust max_length based on input_length
-        max_length = min(max_length, input_length)  # Ensure max_length is not greater than input_length
+        # Determine the min_length and max_length based on the input length and percentage
+        target_length = int(input_length * percentage)
+        min_length = max(30, target_length // 3)  # Ensure min_length is not too small
+        max_length = target_length
 
         # Chunk the combined text
         chunks = chunk_text(combined_text)
+        no_chunks = len(chunks)
 
         # Summarize each chunk and combine summaries
         summaries = []
         for chunk in chunks:
             # Summarize each chunk individually
-            summary = summarizer(chunk, min_length=min_length, max_length=max_length)[0]['summary_text']
+            summary = summarizer(chunk, min_length=min_length//no_chunks, max_length=max_length//no_chunks)[0]['summary_text']
             summaries.append(summary)
 
         # Combine all summaries into final_summary
-        final_summary = "\n\n".join(summaries)  # Joining summaries with double newline for paragraph breaks # Debugging line
+        final_summary = "\n\n".join(summaries)  # Joining summaries with double newline for paragraph breaks
+        print("Final summary:", final_summary)  # Debugging line
 
-        return jsonify({'summary': final_summary})
+        return jsonify({'summary': final_summary, 'no_chunks': no_chunks})
 
     except Exception as e:
         print(f"Error during summarization: {e}")
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=5002,debug=True)
+    app.run(debug=True)
