@@ -110,7 +110,7 @@ const SummarizationComponent = () => {
             >
               <option value="abstract">Abstract</option>
               <option value="summary">Summary</option>
-              <option value="detailed">Article</option>
+              <option value="article">Article</option>
             </select>
           </label>
           <button onClick={handleSummarize} disabled={isLoading}>
