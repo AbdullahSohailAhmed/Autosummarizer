@@ -108,9 +108,9 @@ const SummarizationComponent = () => {
               value={summaryLevel}
               onChange={(e) => setSummaryLevel(e.target.value)}
             >
-              <option value="abstract">Abstract (5%)</option>
-              <option value="summary">Summary (15%)</option>
-              <option value="detailed">Detailed summary (30%)</option>
+              <option value="abstract">Abstract</option>
+              <option value="summary">Summary</option>
+              <option value="detailed">Article</option>
             </select>
           </label>
           <button onClick={handleSummarize} disabled={isLoading}>

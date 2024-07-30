@@ -44,7 +44,7 @@ def summarize():
         level_to_percentage = {
             'abstract': 0.10,  # 10% of the input length
             'summary': 0.20,  # 20% of the input length
-            'detailed': 0.30,  # 30% of the input length
+            'article': 0.30,  # 30% of the input length
         }
         
         percentage = level_to_percentage.get(level, 0.20)
