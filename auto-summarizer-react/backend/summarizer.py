@@ -35,7 +35,7 @@ def chunk_text(text, chunk_size=1000):
         chunks.append(text[i:i + chunk_size])
     return chunks
 
-@app.route('/summarize', methods=['POST'])
+@app.route('/summarizes', methods=['POST'])
 def summarize():
     try:
         text_list = request.form.getlist('texts')
@@ -88,4 +88,4 @@ def summarize():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=5003)
